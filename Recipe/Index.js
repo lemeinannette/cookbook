@@ -84,38 +84,28 @@ let recipes = [
   }
 ];
 
-// Function to edit a recipe
 function editRecipe(index) {
-  const recipe = recipes[index];
   const editForm = document.getElementById(`edit-form-${index}`);
-  const nameInput = document.getElementById(`name-input-${index}`);
-  const ingredientsInput = document.getElementById(`ingredients-input-${index}`);
-  const instructionsInput = document.getElementById(`instructions-input-${index}`);
+  const editButton = document.getElementById(`edit-button-${index}`);
 
-  if (editForm.style.display === "none") {
-    // Show the edit form
+  if (editForm.style.display === "none" || editForm.style.display === "") {
+    // Show edit form
     editForm.style.display = "block";
-    nameInput.value = recipe.name;
-    ingredientsInput.value = recipe.ingredients.join("\n");
-    instructionsInput.value = recipe.instructions.join("\n");
+    editButton.textContent = "Cancel";
   } else {
-    // Save the changes to the recipe
-    recipe.name = nameInput.value;
-    recipe.ingredients = ingredientsInput.value.split("\n");
-    recipe.instructions = instructionsInput.value.split("\n");
+    // Hide edit form
     editForm.style.display = "none";
-    displayRecipes();
+    editButton.textContent = "Edit";
   }
 }
 
-// Function to display recipes
 function displayRecipes() {
   const recipeList = document.getElementById("recipe-list");
   recipeList.innerHTML = "";
 
   recipes.forEach((recipe, index) => {
     const recipeHTML = `
-      <div class="meal">
+      <div class="meal" id="${recipe.name.replace(/\s+/g, '-').toLowerCase()}">
         <h2>${recipe.name}</h2>
         <h4>Ingredients:</h4>
         <ul>
@@ -125,12 +115,12 @@ function displayRecipes() {
         <ol>
           ${recipe.instructions.map(instruction => `<li>${instruction}</li>`).join("")}
         </ol>
-        <button class="edit-button" onclick="editRecipe(${index})">Edit</button>
+        <button id="edit-button-${index}" class="edit-button" onclick="editRecipe(${index})">Edit</button>
         <div id="edit-form-${index}" class="edit-form" style="display: none;">
           <input id="name-input-${index}" type="text" value="${recipe.name}">
           <textarea id="ingredients-input-${index}">${recipe.ingredients.join("\n")}</textarea>
           <textarea id="instructions-input-${index}">${recipe.instructions.join("\n")}</textarea>
-          <button class="save-button" onclick="editRecipe(${index})">Save</button>
+          <button class="save-button" onclick="saveRecipe(${index})">Save</button>
         </div>
       </div>
     `;
@@ -138,5 +128,23 @@ function displayRecipes() {
   });
 }
 
-// Call the displayRecipes function when the window loads
-window.onload = displayRecipes;
+function saveRecipe(index) {
+  const nameInput = document.getElementById(`name-input-${index}`);
+  const ingredientsInput = document.getElementById(`ingredients-input-${index}`);
+  const instructionsInput = document.getElementById(`instructions-input-${index}`);
+
+  recipes[index].name = nameInput.value;
+  recipes[index].ingredients = ingredientsInput.value.split("\n");
+  recipes[index].instructions = instructionsInput.value.split("\n");
+
+  // Hide edit form after saving
+  const editForm = document.getElementById(`edit-form-${index}`);
+  const editButton = document.getElementById(`edit-button-${index}`);
+  editForm.style.display = "none";
+  editButton.textContent = "Edit";
+
+  displayRecipes();
+}
+
+// Initial display of recipes
+displayRecipes();
