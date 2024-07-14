@@ -1,0 +1,59 @@
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+    color: #333; /* dark text */
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8bsXyf7MZxPk-Ln7v27vywIigPTMzYtQbUg&s');
+    background-size: 100vw 100vh; /* cover the entire viewport */
+    background-position: center;
+    background-attachment: fixed; /* fix the image to the viewport */
+  }
+  
+  .content {
+    background-color: #fff; /* white background */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h2, h3, h4 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333; /* dark text */
+  }
+  
+  .meal {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recipe-content {
+    padding: 10px;
+  }
+  
+  .edit-form {
+    display: none;
+  }
+  
+  .edit-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .save-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
